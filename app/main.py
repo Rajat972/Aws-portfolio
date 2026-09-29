@@ -14,6 +14,9 @@ init_db()
 
 EMAIL_REGEX = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
 
+# Admin Secret Key for protecting production database API
+ADMIN_SECRET_KEY = os.getenv("ADMIN_SECRET_KEY", "").strip()
+
 def async_email_worker(saved_record: dict):
     """Background thread function for sending notification email without blocking response."""
     res = send_notification_email(saved_record)
@@ -79,7 +82,7 @@ def handle_contact_submission():
 
         return jsonify({
             "success": True,
-            "message": "Thank you! Your details have been saved to the database and an email notification has been triggered.",
+            "message": "Thank you! Your details have been received and saved. I will get back to you soon.",
             "data": {
                 "id": saved_record["id"],
                 "created_at": saved_record["created_at"]
@@ -92,8 +95,15 @@ def handle_contact_submission():
 @app.route("/api/messages", methods=["GET"])
 def list_contact_messages():
     """
-    Retrieve stored contact messages from SQLite database.
+    Protected API endpoint to view contact messages.
+    Requires ADMIN_SECRET_KEY in header or query parameter. 
+    Public access without secret is forbidden on production.
     """
+    provided_key = request.headers.get("X-Admin-Key") or request.args.get("admin_key")
+
+    if not ADMIN_SECRET_KEY or provided_key != ADMIN_SECRET_KEY:
+        return jsonify({"success": False, "detail": "Access forbidden: Admin authentication required."}), 403
+
     try:
         limit = request.args.get("limit", default=50, type=int)
         messages = get_all_contact_messages(limit=limit)
