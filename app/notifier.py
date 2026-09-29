@@ -13,14 +13,14 @@ logger.setLevel(logging.INFO)
 
 def send_notification_email(contact_data: dict) -> dict:
     """
-    Sends an email notification to the portfolio owner when a new contact form submission arrives.
+    Sends an email notification to Rajat when a new visitor contact form submission arrives.
     If SMTP variables are not set in .env, falls back to logging/preview mode cleanly.
     """
     smtp_server = os.getenv("SMTP_SERVER", "").strip()
     smtp_port = int(os.getenv("SMTP_PORT", "587"))
     sender_email = os.getenv("SENDER_EMAIL", "").strip()
     sender_password = os.getenv("SENDER_PASSWORD", "").strip()
-    receiver_email = os.getenv("RECEIVER_EMAIL", sender_email).strip()
+    receiver_email = os.getenv("RECEIVER_EMAIL", "rajatrajput076@gmail.com").strip()
 
     name = contact_data.get("name", "N/A")
     email = contact_data.get("email", "N/A")
@@ -46,13 +46,12 @@ Message:
     if not smtp_server or not sender_email or not sender_password:
         preview_notice = (
             "\n=======================================================\n"
-            "   [LOCAL PREVIEW MODE - EMAIL NOTIFICATION TRIGGERED]\n"
+            "   [LOCAL PREVIEW MODE - OWNER EMAIL NOTIFICATION]\n"
             "=======================================================\n"
-            f"TO: {receiver_email if receiver_email else '[Owner Email Not Configured]'}\n"
+            f"TO: {receiver_email}\n"
             f"FROM: {sender_email if sender_email else 'noreply@portfolio.local'}\n"
             f"SUBJECT: [Portfolio Contact] {subject} from {name}\n"
             f"{email_body}\n"
-            "NOTE: To send real emails, set SMTP_SERVER, SENDER_EMAIL, and SENDER_PASSWORD in your .env file.\n"
             "=======================================================\n"
         )
         try:
@@ -60,7 +59,6 @@ Message:
         except Exception:
             print(preview_notice.encode("ascii", "ignore").decode("ascii"))
         
-        # Save to local log file as well
         log_file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "notifications.log")
         with open(log_file_path, "a", encoding="utf-8") as f:
             f.write(preview_notice)
@@ -129,9 +127,132 @@ Message:
                 server.login(sender_email, sender_password)
                 server.send_message(msg)
 
-        logger.info(f"Email sent successfully to {receiver_email} for submission ID {contact_data.get('id')}")
+        logger.info(f"Owner notification email sent to {receiver_email}")
         return {"status": "success", "message": f"Notification email sent to {receiver_email}"}
     except Exception as e:
         error_msg = f"Failed to send email notification: {str(e)}"
+        logger.error(error_msg)
+        return {"status": "error", "message": error_msg}
+
+
+def send_thank_you_email_to_visitor(contact_data: dict) -> dict:
+    """
+    Sends an automated thank-you / confirmation response email directly to the visitor
+    who submitted their details into the contact form box.
+    """
+    smtp_server = os.getenv("SMTP_SERVER", "").strip()
+    smtp_port = int(os.getenv("SMTP_PORT", "587"))
+    sender_email = os.getenv("SENDER_EMAIL", "").strip()
+    sender_password = os.getenv("SENDER_PASSWORD", "").strip()
+
+    name = contact_data.get("name", "Valued Visitor")
+    email = contact_data.get("email", "").strip()
+    subject = contact_data.get("subject", "Portfolio Inquiry")
+    message = contact_data.get("message", "")
+
+    if not email:
+        return {"status": "skipped", "message": "No visitor email provided"}
+
+    email_body = f"""
+Hi {name},
+
+Thank you for reaching out to me through my portfolio website!
+
+I have received your message regarding "{subject}" and I appreciate your inquiry. I am currently reviewing your message and will get back to you as soon as possible.
+
+Here is a copy of your submitted message for your records:
+--------------------------------------------------
+{message}
+--------------------------------------------------
+
+Best regards,
+Rajat Bandhral
+DevOps Engineer
+Email: rajatrajput076@gmail.com
+Phone: +91 6006231663
+Location: Jammu, India
+    """
+
+    if not smtp_server or not sender_email or not sender_password:
+        preview_notice = (
+            "\n=======================================================\n"
+            "   [LOCAL PREVIEW MODE - VISITOR THANK-YOU RESPONDER]\n"
+            "=======================================================\n"
+            f"TO: {email}\n"
+            f"FROM: Rajat Bandhral <{sender_email if sender_email else 'rajatrajput076@gmail.com'}>\n"
+            f"SUBJECT: Thank you for contacting Rajat Bandhral!\n"
+            f"{email_body}\n"
+            "=======================================================\n"
+        )
+        try:
+            print(preview_notice)
+        except Exception:
+            print(preview_notice.encode("ascii", "ignore").decode("ascii"))
+        
+        log_file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "notifications.log")
+        with open(log_file_path, "a", encoding="utf-8") as f:
+            f.write(preview_notice)
+            
+        return {"status": "preview_mode", "message": "Thank-you response logged to preview mode."}
+
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = f"Thank you for contacting Rajat Bandhral!"
+    msg["From"] = f"Rajat Bandhral <{sender_email}>"
+    msg["To"] = email
+
+    html_content = f"""
+    <html>
+      <body style="font-family: Arial, sans-serif; background-color: #f4f6f9; padding: 20px; color: #333;">
+        <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; border: 1px solid #e1e4e8; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+          <div style="background: #2563eb; color: #ffffff; padding: 24px; text-align: center;">
+            <h2 style="margin: 0; font-size: 22px;">Thank You for Reaching Out!</h2>
+          </div>
+          <div style="padding: 28px;">
+            <p style="font-size: 16px; color: #0f172a; margin-top: 0;">Hi <strong>{name}</strong>,</p>
+            <p style="font-size: 15px; color: #334155; line-height: 1.6;">
+              Thank you for contacting me through my portfolio website. I have successfully received your inquiry regarding <strong>"{subject}"</strong>.
+            </p>
+            <p style="font-size: 15px; color: #334155; line-height: 1.6;">
+              I am currently reviewing your details and will get back to you as soon as possible.
+            </p>
+            
+            <div style="background: #f8fafc; border-left: 4px solid #2563eb; padding: 16px; border-radius: 4px; margin: 20px 0;">
+              <h4 style="margin: 0 0 8px 0; color: #1e293b;">Your Message Summary:</h4>
+              <p style="margin: 0; white-space: pre-wrap; color: #475569; font-size: 14px; line-height: 1.6;">{message}</p>
+            </div>
+            
+            <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 24px 0;" />
+            
+            <div style="font-size: 14px; color: #64748b;">
+              <p style="margin: 0 0 4px 0; font-weight: bold; color: #0f172a;">Best regards,</p>
+              <p style="margin: 0 0 4px 0; font-size: 15px; font-weight: bold; color: #2563eb;">Rajat Bandhral</p>
+              <p style="margin: 0 0 2px 0;">DevOps Engineer</p>
+              <p style="margin: 0 0 2px 0;">Email: <a href="mailto:rajatrajput076@gmail.com" style="color: #2563eb; text-decoration: none;">rajatrajput076@gmail.com</a></p>
+              <p style="margin: 0;">Location: Jammu, India</p>
+            </div>
+          </div>
+        </div>
+      </body>
+    </html>
+    """
+
+    msg.attach(MIMEText(email_body, "plain"))
+    msg.attach(MIMEText(html_content, "html"))
+
+    try:
+        if smtp_port == 465:
+            with smtplib.SMTP_SSL(smtp_server, smtp_port) as server:
+                server.login(sender_email, sender_password)
+                server.send_message(msg)
+        else:
+            with smtplib.SMTP(smtp_server, smtp_port) as server:
+                server.starttls()
+                server.login(sender_email, sender_password)
+                server.send_message(msg)
+
+        logger.info(f"Thank-you email sent successfully to visitor: {email}")
+        return {"status": "success", "message": f"Thank-you email sent to {email}"}
+    except Exception as e:
+        error_msg = f"Failed to send thank-you email: {str(e)}"
         logger.error(error_msg)
         return {"status": "error", "message": error_msg}

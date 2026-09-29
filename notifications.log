@@ -20,3 +20,51 @@ We loved your portfolio! We have an exciting opening for a Senior Full Stack Eng
     
 NOTE: To send real emails, set SMTP_SERVER, SENDER_EMAIL, and SENDER_PASSWORD in your .env file.
 =======================================================
+
+=======================================================
+   [LOCAL PREVIEW MODE - OWNER EMAIL NOTIFICATION]
+=======================================================
+TO: rajatrajput076@gmail.com
+FROM: rajatrajput076@gmail.com
+SUBJECT: [Portfolio Contact] Cloud Infrastructure Project Inquiry from David Miller
+
+NEW CONTACT INQUIRY FROM YOUR PORTFOLIO WEBSITE
+------------------------------------------------
+Received At : 2026-09-29 23:36:54
+Sender Name : David Miller
+Sender Email: david@example.com
+Subject     : Cloud Infrastructure Project Inquiry
+
+Message:
+------------------------------------------------
+Hi Rajat, I saw your DevOps portfolio and would like to discuss a cloud migration project.
+------------------------------------------------
+    
+=======================================================
+
+=======================================================
+   [LOCAL PREVIEW MODE - VISITOR THANK-YOU RESPONDER]
+=======================================================
+TO: david@example.com
+FROM: Rajat Bandhral <rajatrajput076@gmail.com>
+SUBJECT: Thank you for contacting Rajat Bandhral!
+
+Hi David Miller,
+
+Thank you for reaching out to me through my portfolio website!
+
+I have received your message regarding "Cloud Infrastructure Project Inquiry" and I appreciate your inquiry. I am currently reviewing your message and will get back to you as soon as possible.
+
+Here is a copy of your submitted message for your records:
+--------------------------------------------------
+Hi Rajat, I saw your DevOps portfolio and would like to discuss a cloud migration project.
+--------------------------------------------------
+
+Best regards,
+Rajat Bandhral
+DevOps Engineer
+Email: rajatrajput076@gmail.com
+Phone: +91 6006231663
+Location: Jammu, India
+    
+=======================================================

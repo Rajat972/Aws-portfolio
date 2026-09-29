@@ -4,7 +4,7 @@ import threading
 import re
 
 from app.database import init_db, save_contact_message, get_all_contact_messages, update_email_notified_status
-from app.notifier import send_notification_email
+from app.notifier import send_notification_email, send_thank_you_email_to_visitor
 
 static_folder = os.path.join(os.path.dirname(os.path.dirname(__file__)), "static")
 app = Flask(__name__, static_folder=static_folder)
@@ -18,10 +18,18 @@ EMAIL_REGEX = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
 ADMIN_SECRET_KEY = os.getenv("ADMIN_SECRET_KEY", "").strip()
 
 def async_email_worker(saved_record: dict):
-    """Background thread function for sending notification email without blocking response."""
-    res = send_notification_email(saved_record)
-    if res.get("status") == "success":
+    """
+    Background thread function for sending emails:
+    1. Sends owner notification email to Rajat
+    2. Sends thank-you auto-responder email to the visitor
+    """
+    # 1. Send notification email to Rajat
+    res_owner = send_notification_email(saved_record)
+    if res_owner.get("status") in ("success", "preview_mode"):
         update_email_notified_status(saved_record["id"], True)
+
+    # 2. Send thank-you response email to the visitor who submitted their details
+    send_thank_you_email_to_visitor(saved_record)
 
 @app.route("/", methods=["GET"])
 def index():
@@ -37,7 +45,7 @@ def serve_static(filename):
 def handle_contact_submission():
     """
     Receives visitor details from portfolio contact box, stores in SQLite DB, 
-    and triggers background email notification.
+    and triggers background email notification + visitor thank-you responder.
     """
     data = request.get_json(force=True, silent=True)
     if not data:
@@ -75,14 +83,14 @@ def handle_contact_submission():
             user_agent=user_agent
         )
 
-        # 2. Trigger asynchronous email notification in background thread
+        # 2. Trigger asynchronous email dispatching (Owner notification + Visitor Thank-You)
         email_thread = threading.Thread(target=async_email_worker, args=(saved_record,))
         email_thread.daemon = True
         email_thread.start()
 
         return jsonify({
             "success": True,
-            "message": "Thank you! Your details have been received and saved. I will get back to you soon.",
+            "message": "Thank you for reaching out! Your message has been received and a confirmation email has been sent to your inbox.",
             "data": {
                 "id": saved_record["id"],
                 "created_at": saved_record["created_at"]
