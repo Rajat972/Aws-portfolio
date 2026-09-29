@@ -253,6 +253,7 @@ Location: Jammu, India
         logger.info(f"Thank-you email sent successfully to visitor: {email}")
         return {"status": "success", "message": f"Thank-you email sent to {email}"}
     except Exception as e:
-        error_msg = f"Failed to send thank-you email: {str(e)}"
+        error_msg = f"Failed to send thank-you email to {email}: {str(e)}"
+        print(f"❌ [SMTP ERROR] {error_msg}")
         logger.error(error_msg)
         return {"status": "error", "message": error_msg}
