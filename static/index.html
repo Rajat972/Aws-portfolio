@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajat Bandhral | DevOps Engineer Portfolio</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <!-- Background Ambient Glow Effects -->
+    <div class="glow-bg glow-1"></div>
+    <div class="glow-bg glow-2"></div>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="brand">
+                <span class="brand-code">&lt;</span>Rajat<span class="brand-accent">.DevOps</span><span class="brand-code">/&gt;</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#about"><i class="fa-solid fa-user"></i> About</a>
+                <a href="#skills"><i class="fa-solid fa-gears"></i> Skills</a>
+                <a href="#experience"><i class="fa-solid fa-briefcase"></i> Experience</a>
+                <a href="#projects"><i class="fa-solid fa-cubes"></i> Projects</a>
+                <a href="#education"><i class="fa-solid fa-graduation-cap"></i> Education</a>
+                <a href="#contact" class="nav-cta"><i class="fa-solid fa-envelope"></i> Contact Box</a>
+            </nav>
+            <button class="btn-admin-inbox" id="openInboxBtn">
+                <i class="fa-solid fa-database"></i> DB Messages (<span id="msgCountBadge">0</span>)
+            </button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="hero-badge">
+                <span class="pulse-dot"></span> DevOps Engineer • 3 Years Experience
+            </div>
+            <h1 class="hero-title">
+                Hi, I'm <span class="gradient-text">Rajat Bandhral</span>
+            </h1>
+            <p class="hero-subtitle">
+                DevOps Engineer specializing in AWS & Azure environments, CI/CD automation, Docker, Kubernetes, Terraform, and Production Release Infrastructure.
+            </p>
+
+            <div class="hero-contact-bar">
+                <span><i class="fa-solid fa-location-dot"></i> Jammu, India</span>
+                <span><i class="fa-solid fa-envelope"></i> rajatrajput076@gmail.com</span>
+                <span><i class="fa-solid fa-phone"></i> +91 6006231663</span>
+            </div>
+
+            <div class="hero-actions">
+                <a href="#contact" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Get In Touch</a>
+                <a href="#projects" class="btn btn-secondary"><i class="fa-solid fa-laptop-code"></i> View Projects</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section" id="about">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fa-solid fa-user"></i> Professional Summary</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-grid">
+                <div class="about-card glass-card">
+                    <h3>About Me</h3>
+                    <p>DevOps Engineer with 3 years of experience in AWS and Azure cloud environments, CI/CD automation, containerization, and production support. Skilled in Jenkins, Docker, Kubernetes, Terraform, and IIS-based application deployments, with hands-on experience in monitoring, incident management, and infrastructure automation.</p>
+                    
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <span class="stat-number">3+</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">AWS & Azure</span>
+                            <span class="stat-label">Cloud Platforms</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">K8s & Docker</span>
+                            <span class="stat-label">Container Tech</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">Terraform</span>
+                            <span class="stat-label">IaC Automation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="section" id="skills">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fa-solid fa-gears"></i> Technical Skills</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-chip"><i class="fa-brands fa-aws"></i> AWS (EC2, IAM, VPC, Security Groups, EKS)</div>
+                <div class="skill-chip"><i class="fa-brands fa-microsoft"></i> Microsoft Azure</div>
+                <div class="skill-chip"><i class="fa-solid fa-code-branch"></i> CI/CD: Jenkins & Azure DevOps</div>
+                <div class="skill-chip"><i class="fa-brands fa-docker"></i> Containers: Docker & Kubernetes (Helm, Ingress)</div>
+                <div class="skill-chip"><i class="fa-solid fa-cubes"></i> IaC: Terraform & Ansible</div>
+                <div class="skill-chip"><i class="fa-solid fa-server"></i> OS & Servers: Linux, Windows Server, IIS</div>
+                <div class="skill-chip"><i class="fa-solid fa-database"></i> Databases: MS SQL Server, SQLite</div>
+                <div class="skill-chip"><i class="fa-solid fa-chart-line"></i> Monitoring & Ops: Grafana, Release Management, Production Support</div>
+            </div>
+        </section>
+
+        <!-- Work Experience Section -->
+        <section class="section" id="experience">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Work Experience</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-card glass-card">
+                <div class="exp-header">
+                    <div>
+                        <h3 class="exp-role">DevOps Engineer</h3>
+                        <h4 class="exp-company"><i class="fa-solid fa-building"></i> NavFund Services</h4>
+                    </div>
+                    <span class="exp-date"><i class="fa-regular fa-calendar-days"></i> July 2023 - Present</span>
+                </div>
+                <ul class="exp-list">
+                    <li>Manage production environments for multiple in-house financial & accounting applications supporting client management, reporting, and operations.</li>
+                    <li>Execute production deployments, configuration updates, and scheduled release activities.</li>
+                    <li>Manage corporate website updates, containerized deployments, and production troubleshooting.</li>
+                    <li>Perform routine server maintenance and scheduled production changes to minimize business disruption.</li>
+                    <li>Support CI/CD pipelines and deployment automation using Azure DevOps and Git.</li>
+                    <li>Execute production releases during scheduled maintenance windows and perform post-deployment validation and rollback activities when required.</li>
+                    <li>Collaborate with development, QA, database, and business teams to resolve technical issues and ensure smooth releases.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="section" id="projects">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fa-solid fa-cubes"></i> Highlighted Projects</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card glass-card">
+                    <div class="project-icon"><i class="fa-brands fa-docker"></i></div>
+                    <h3>Kubernetes Microservices Hosting & Container Orchestration</h3>
+                    <p>Containerized application components using Docker and deployed workloads to AWS EKS Kubernetes cluster. Created Kubernetes Deployment, Service, ConfigMap, and Ingress manifests for routing.</p>
+                    <div class="project-tags">
+                        <span>AWS EKS</span>
+                        <span>Docker</span>
+                        <span>Kubernetes</span>
+                        <span>Helm</span>
+                        <span>Nginx Ingress</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card">
+                    <div class="project-icon"><i class="fa-brands fa-windows"></i></div>
+                    <h3>Windows Server & IIS Application Hosting Infrastructure</h3>
+                    <p>Managed hosting and production support for internal financial and accounting applications on Windows Server using IIS. Configured application pools, environment configs, and server health monitoring.</p>
+                    <div class="project-tags">
+                        <span>IIS</span>
+                        <span>Windows Server</span>
+                        <span>PowerShell</span>
+                        <span>MS SQL Server</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card">
+                    <div class="project-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                    <h3>Portfolio Web App with Automated DB & Email Dispatch</h3>
+                    <p>Full-stack web portfolio featuring visitor contact detailing, automated SQLite database persistence, background email notifications, Docker containerization, and AWS EC2 deployment automation.</p>
+                    <div class="project-tags">
+                        <span>Flask</span>
+                        <span>SQLite</span>
+                        <span>Docker</span>
+                        <span>AWS EC2</span>
+                        <span>SMTP</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="section" id="education">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Education</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="edu-grid">
+                <div class="edu-card glass-card">
+                    <span class="edu-year">2019 - 2023</span>
+                    <h3>Bachelor of Technology (B.Tech) - Computer Science</h3>
+                    <h4>Swami Keshvanand Institute of Technology (SKIT), Jaipur</h4>
+                    <span class="edu-score"><i class="fa-solid fa-award"></i> CGPA: 8.37 / 10</span>
+                </div>
+
+                <div class="edu-card glass-card">
+                    <span class="edu-year">2018 - 2019</span>
+                    <h3>Class XII (Higher Secondary)</h3>
+                    <h4>Govt. Higher Secondary School, Jammu</h4>
+                    <span class="edu-score"><i class="fa-solid fa-award"></i> Percentage: 73.6%</span>
+                </div>
+
+                <div class="edu-card glass-card">
+                    <span class="edu-year">2016 - 2017</span>
+                    <h3>Class X (High School)</h3>
+                    <h4>Bal Bharti Public High School, Jammu</h4>
+                    <span class="edu-score"><i class="fa-solid fa-award"></i> Percentage: 74.27%</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Details Box (Core Feature) -->
+        <section class="section" id="contact">
+            <div class="contact-box-container">
+                <div class="contact-header">
+                    <span class="contact-badge"><i class="fa-solid fa-paper-plane"></i> Get In Touch</span>
+                    <h2>Send Rajat a Message</h2>
+                    <p>Writing your details below immediately saves your entry into the local SQLite database and dispatches an instant email notification to <strong>rajatrajput076@gmail.com</strong>.</p>
+                </div>
+
+                <div class="contact-card glass-card">
+                    <form id="contactForm" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name"><i class="fa-solid fa-user"></i> Your Name <span class="required">*</span></label>
+                                <input type="text" id="name" name="name" placeholder="e.g. Hiring Manager / Recruiter" required minlength="2">
+                                <span class="error-msg" id="nameError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="fa-solid fa-at"></i> Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" placeholder="name@company.com" required>
+                                <span class="error-msg" id="emailError"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject"><i class="fa-solid fa-heading"></i> Subject <span class="required">*</span></label>
+                            <input type="text" id="subject" name="subject" placeholder="DevOps Engineer Role / Project Consultation" required minlength="2">
+                            <span class="error-msg" id="subjectError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="label-with-count">
+                                <label for="message"><i class="fa-solid fa-message"></i> Message Details <span class="required">*</span></label>
+                                <span class="char-count"><span id="charNum">0</span>/3000</span>
+                            </div>
+                            <textarea id="message" name="message" rows="5" placeholder="Hi Rajat, I reviewed your DevOps profile and would love to discuss..." required minlength="5" maxlength="3000"></textarea>
+                            <span class="error-msg" id="messageError"></span>
+                        </div>
+
+                        <!-- Status Alert Banner -->
+                        <div class="alert-box" id="alertBox" style="display: none;"></div>
+
+                        <button type="submit" class="btn btn-submit" id="submitBtn">
+                            <span class="btn-text"><i class="fa-solid fa-paper-plane"></i> Submit Details</span>
+                            <span class="spinner" id="btnSpinner" style="display: none;">
+                                <i class="fa-solid fa-circle-notch fa-spin"></i> Saving & Emailing Rajat...
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2026 Rajat Bandhral • DevOps Engineer Portfolio. Hosted on AWS.</p>
+            <div class="footer-links">
+                <a href="#hero">Back to Top <i class="fa-solid fa-arrow-up"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Stored DB Messages Modal -->
+    <div class="modal-backdrop" id="inboxModal">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-database"></i> SQLite Stored Submissions</h3>
+                <button class="modal-close" id="closeInboxBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">This inbox displays visitor submissions stored in <code>portfolio.db</code>.</p>
+                <div class="messages-list" id="messagesList">
+                    <div class="loading-state"><i class="fa-solid fa-circle-notch fa-spin"></i> Loading entries...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

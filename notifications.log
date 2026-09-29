@@ -1,0 +1,22 @@
+
+=======================================================
+   [LOCAL PREVIEW MODE - EMAIL NOTIFICATION TRIGGERED]
+=======================================================
+TO: [Owner Email Not Configured]
+FROM: noreply@portfolio.local
+SUBJECT: [Portfolio Contact] Full-Stack Opportunity from Sarah Jenkins
+
+NEW CONTACT INQUIRY FROM YOUR PORTFOLIO WEBSITE
+------------------------------------------------
+Received At : 2026-09-28 23:54:43
+Sender Name : Sarah Jenkins
+Sender Email: sarah@techcorp.io
+Subject     : Full-Stack Opportunity
+
+Message:
+------------------------------------------------
+We loved your portfolio! We have an exciting opening for a Senior Full Stack Engineer.
+------------------------------------------------
+    
+NOTE: To send real emails, set SMTP_SERVER, SENDER_EMAIL, and SENDER_PASSWORD in your .env file.
+=======================================================

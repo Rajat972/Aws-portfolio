@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  portfolio-web:
+    build: .
+    container_name: portfolio_app
+    restart: always
+    ports:
+      - "80:8000"
+      - "8000:8000"
+    volumes:
+      - ./portfolio.db:/app/portfolio.db
+      - ./notifications.log:/app/notifications.log
+      - ./.env:/app/.env
+    environment:
+      - PYTHONUNBUFFERED=1
